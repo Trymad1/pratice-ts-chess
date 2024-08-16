@@ -20,7 +20,7 @@ export abstract class Piece {
     this.color = color;
     this.img = img;
     this.pieceStr = pieceStr;
-    this.pieceStr = this.defineFenStr(color, pieceStr);
+    this.pieceFenStr = this.defineFenStr(color, pieceStr);
     this.point = new Point();
   }
 
