@@ -38,4 +38,8 @@ export class Cell {
     this.piece = piece;
     return currentPiece;
   }
+
+  public toString() : string {
+    return this.piece == null ? "*" : this.piece.toString();
+  }
 }
