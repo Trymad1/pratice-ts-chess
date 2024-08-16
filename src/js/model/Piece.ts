@@ -1,13 +1,14 @@
+import { Color } from "./Color";
 import { Point } from "./Point";
 
 export abstract class Piece {
 
-  private pieceStr : String;
+  private color : Color;
   private img : String;
   private point : Point;
 
-  public constructor(pieceStr : String, img : String) {
-    this.pieceStr = pieceStr;
+  public constructor(color : Color, img : String) {
+    this.color = color;
     this.img = img;
     this.point = new Point();
   }
@@ -23,7 +24,7 @@ export abstract class Piece {
     return this.img;
   }
 
-  public toString() : String {
-    return this.pieceStr;
+  public toString() : Color {
+    return this.color;
   }
 }
