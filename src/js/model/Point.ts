@@ -1,4 +1,4 @@
-export class Coordinates {
+export class Point {
   private x : number;
   private y : number;
 
@@ -28,8 +28,8 @@ export class Coordinates {
     this.y = y;
   }
   
-  public setCoordinates(coord : Coordinates) {
-    this.x = coord.getX();
-    this.y = coord.getY();
+  public setPoint(point : Point) {
+    this.x = point.getX();
+    this.y = point.getY();
   }
 }

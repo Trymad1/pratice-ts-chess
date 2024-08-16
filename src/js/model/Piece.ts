@@ -1,22 +1,22 @@
-import { Coordinates } from "./Coordinates";
+import { Point } from "./Point";
 
 export abstract class Piece {
 
   private pieceStr : String;
   private img : String;
-  private coord : Coordinates;
+  private point : Point;
 
   public constructor(pieceStr : String, img : String) {
     this.pieceStr = pieceStr;
     this.img = img;
-    this.coord = new Coordinates();
+    this.point = new Point();
   }
 
   // TODO think about how piece get allowed point and pieces for attack, and what is returns.
-  public abstract getAllowedCoord();
+  public abstract getAllowedPoints();
 
-  public copyCoordinates(coord : Coordinates) {
-    this.coord.setCoordinates(coord);
+  public copyPoint(point : Point) {
+    this.point.setPoint(point);
   }
 
   public getImage() : String {
