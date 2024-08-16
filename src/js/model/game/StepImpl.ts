@@ -5,27 +5,31 @@ import { Step } from "./Step";
 
 export class StepImpl implements Step {
 
-  private movedPiece : Piece;
-  private pointToMoveStr : string;
-  private pointToMove : Point;
-  private currentBoard : Board;
+  private readonly movedPiece : Piece;
+  private readonly pointToMoveStr : string;
+  private readonly pointToMove : Point;
+  private readonly currentBoard : Board;
 
   constructor(movedPiece : Piece, pointToMove : Point, board : Board) {
     this.movedPiece = movedPiece;
-    this.pointToMove = this.pointToMove;
+    this.pointToMove = pointToMove;
     this.currentBoard = board;
   }
 
-  getMovedPiece(): Piece {
-    throw new Error("Method not implemented.");
+  public getMovedPiece(): Piece {
+    return this.movedPiece;
   }
-  getPointToMove(): Point {
-    throw new Error("Method not implemented.");
+
+  public getPointToMove(): Point {
+    return this.pointToMove;
   }
-  getFenPosition(): string {
-    throw new Error("Method not implemented.");
+
+  public getFenPosition(): string {
+    return this.pointToMoveStr;
   }
-  getCurrentBoard(): Board {
-    throw new Error("Method not implemented.");
+
+  public getCurrentBoard(): Board {
+    return this.currentBoard;
   }
+  
 }
