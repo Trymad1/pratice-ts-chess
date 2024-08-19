@@ -1,13 +1,9 @@
 export class Point {
+
   private x: number;
   private y: number;
 
-  public constructor() {
-    this.x = 0;
-    this.y = 0;
-  }
-
-  public constuctor(x: number, y: number) {
+  public constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
   }
@@ -32,4 +28,5 @@ export class Point {
     this.x = point.getX();
     this.y = point.getY();
   }
+
 }

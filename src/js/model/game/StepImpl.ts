@@ -6,7 +6,6 @@ import { Step } from "./Step";
 export class StepImpl implements Step {
 
   private readonly movedPiece: Piece;
-  private readonly pointToMoveStr: string;
   private readonly pointToMove: Point;
   private readonly currentBoard: Board;
 
@@ -22,10 +21,6 @@ export class StepImpl implements Step {
 
   public getPointToMove(): Point {
     return this.pointToMove;
-  }
-
-  public getFenPosition(): string {
-    return this.pointToMoveStr;
   }
 
   public getCurrentBoard(): Board {

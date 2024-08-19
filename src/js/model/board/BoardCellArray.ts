@@ -16,7 +16,9 @@ export class BoardCellArray implements Board {
   }
 
   private initCellArray(): Cell[][] {
-    return Array.from({ length : this.height}, () => Array(this.width).fill(new Cell()));
+    return Array.from({ length: this.height }, () => 
+      Array.from({ length: this.width }, () => new Cell())
+    );
   }
 
   getWidth(): number {
@@ -28,19 +30,19 @@ export class BoardCellArray implements Board {
   }
 
   getPiece(point: Point): Piece | null {
-    return this.cellArr[point.getX()][point.getY()].getPiece();
+    return this.cellArr[point.getY()][point.getX()].getPiece();
   }
 
   isCellEmpty(point: Point): boolean {
-    return this.cellArr[point.getX()][point.getY()].isEmpty();
+    return this.cellArr[point.getY()][point.getX()].isEmpty();
   }
 
   clearCell(point: Point): void {
-    this.cellArr[point.getX()][point.getY()].removePiece();
+    this.cellArr[point.getY()][point.getX()].removePiece();
   }
 
   setPiece(point: Point, piece: Piece) {
-    this.cellArr[point.getX()][point.getY()].setPiece(piece);
+    this.cellArr[point.getY()][point.getX()].setPiece(piece);
   }
 
   copy(): Board {
