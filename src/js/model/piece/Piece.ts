@@ -12,30 +12,16 @@ export abstract class Piece {
 
   private color : Color;
   private pieceStr : string;
-  private pieceFenStr : string;
   private img : String;
-  private point : Point;
 
   public constructor(color : Color, img : String, pieceStr : string) {
     this.color = color;
     this.img = img;
     this.pieceStr = pieceStr;
-    this.pieceFenStr = this.defineFenStr(color, pieceStr);
-    this.point = new Point();
-  }
-
-  private defineFenStr(color : Color, pieceStr : string) : string {
-    if(color == Color.WHITE) return pieceStr;
-    else if(color == Color.BLACK) return pieceStr.toUpperCase();
-    else return ColorUtil.getColorName(color).concat(pieceStr);
   }
 
   // TODO think about how piece get allowed point and pieces for attack, and what is returns.
-  // public abstract getAllowedPoints();
-
-  public copyPoint(point : Point) {
-    this.point.setPoint(point);
-  }
+  // public abstract getAllowedPoints(piecePoint : Point);
 
   public getImage() : string {
     return this.img.toString();
@@ -47,9 +33,5 @@ export abstract class Piece {
 
   public toString() : string {
     return this.pieceStr;
-  }
-
-  public toFenString() : string {
-    return this.pieceFenStr;
   }
 }
