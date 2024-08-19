@@ -1,3 +1,4 @@
+import { Point } from "../Point";
 import { Piece } from "../piece/Piece";
 import { Cell } from "./Cell";
 
@@ -7,13 +8,13 @@ export interface Board {
 
   getHeight() : number;
   
-  getPiece(x : number, y : number) : Piece | null;
+  getPiece(point : Point) : Piece | null;
 
-  isCellEmpty(x : number, y : number) : boolean;
+  isCellEmpty(point : Point) : boolean;
 
-  clearCell(x : number, y : number) : void;
+  clearCell(point : Point) : void;
 
-  setPiece(x : number, y : number);
+  setPiece(point : Point);
 
   copy() : Board;
 

@@ -8,7 +8,5 @@ export interface Step {
 
   getPointToMove() : Point;
 
-  getFenPosition() : string;
-
   getCurrentBoard() : Board; 
 }
