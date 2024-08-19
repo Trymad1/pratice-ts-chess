@@ -4,7 +4,7 @@ export enum Color {
 
 export class ColorUtil {
 
-  public static getColorName(color : Color) : string {
+  public static getColorName(color: Color): string {
     switch (color) {
       case Color.WHITE:
         return "white";

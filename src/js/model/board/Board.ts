@@ -4,19 +4,19 @@ import { Cell } from "./Cell";
 
 export interface Board {
 
-  getWidth() : number;
+  getWidth(): number;
 
-  getHeight() : number;
+  getHeight(): number;
   
-  getPiece(point : Point) : Piece | null;
+  getPiece(point: Point): Piece | null;
 
-  isCellEmpty(point : Point) : boolean;
+  isCellEmpty(point: Point): boolean;
 
-  clearCell(point : Point) : void;
+  clearCell(point: Point): void;
 
-  setPiece(point : Point);
+  setPiece(point: Point);
 
-  copy() : Board;
+  copy(): Board;
 
-  toString() : string[][];
+  toString(): string[][];
 }

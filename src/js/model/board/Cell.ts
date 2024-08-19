@@ -3,43 +3,43 @@ import { Piece } from "../piece/Piece";
 
 export class Cell {
 
-  private piece : Piece | null;
-  private color : Color;
+  private piece: Piece | null;
+  private color: Color;
 
-  public constructor(color : Color) {
+  public constructor(color: Color) {
     this.piece = null;
     this.color = color;
   }
 
-  public getColor() : Color {
+  public getColor(): Color {
     return this.color;
   }
 
-  public setColor(color : Color) : void {
+  public setColor(color: Color): void {
     this.color = color;
   }
 
-  public isEmpty() : boolean {
+  public isEmpty(): boolean {
     return this.piece == null ? true : false;
   }
 
-  public getPiece() : Piece | null {
+  public getPiece(): Piece | null {
     return this.piece
   }
 
-  public removePiece() : Piece | null {
+  public removePiece(): Piece | null {
     let currentPiece : Piece | null = this.piece;
     this.piece = null;
     return currentPiece;
   }
 
-  public setPiece(piece : Piece) : Piece | null {
+  public setPiece(piece: Piece) : Piece | null {
     let currentPiece : Piece | null = this.piece;
     this.piece = piece;
     return currentPiece;
   }
 
-  public toString() : string {
+  public toString(): string {
     return this.piece == null ? "*" : this.piece.toString();
   }
 }

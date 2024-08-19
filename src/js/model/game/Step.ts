@@ -4,9 +4,9 @@ import { Piece } from "../piece/Piece";
 
 export interface Step {
 
-  getMovedPiece() : Piece;
+  getMovedPiece(): Piece;
 
-  getPointToMove() : Point;
+  getPointToMove(): Point;
 
-  getCurrentBoard() : Board; 
+  getCurrentBoard(): Board; 
 }

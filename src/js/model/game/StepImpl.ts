@@ -5,12 +5,12 @@ import { Step } from "./Step";
 
 export class StepImpl implements Step {
 
-  private readonly movedPiece : Piece;
-  private readonly pointToMoveStr : string;
-  private readonly pointToMove : Point;
-  private readonly currentBoard : Board;
+  private readonly movedPiece: Piece;
+  private readonly pointToMoveStr: string;
+  private readonly pointToMove: Point;
+  private readonly currentBoard: Board;
 
-  constructor(movedPiece : Piece, pointToMove : Point, board : Board) {
+  constructor(movedPiece: Piece, pointToMove: Point, board: Board) {
     this.movedPiece = movedPiece;
     this.pointToMove = pointToMove;
     this.currentBoard = board;
