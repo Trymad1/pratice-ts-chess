@@ -48,6 +48,7 @@ export class BoardCellArray implements Board {
   }
 
   toString(): string[][] {
-    throw new Error("Method not implemented.");
+    return this.cellArr.map( row => 
+      row.map(cell => cell.toString()));
   }
 }
