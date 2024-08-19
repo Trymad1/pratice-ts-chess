@@ -14,7 +14,7 @@ export interface Board {
 
   clearCell(point: Point): void;
 
-  setPiece(point: Point);
+  setPiece(point: Point, piece: Piece): void;
 
   copy(): Board;
 

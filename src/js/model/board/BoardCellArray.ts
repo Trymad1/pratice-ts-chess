@@ -12,10 +12,11 @@ export class BoardCellArray implements Board {
   public constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
+    this.cellArr = this.initCellArray();
   }
 
-  public initCellArray(): void {
-    const array: Cell[][] = [];
+  private initCellArray(): Cell[][] {
+    return Array.from({ length : this.height}, () => Array(this.width).fill(new Cell()));
   }
 
   getWidth(): number {
@@ -27,19 +28,19 @@ export class BoardCellArray implements Board {
   }
 
   getPiece(point: Point): Piece | null {
-    throw new Error("Method not implemented.");
+    return this.cellArr[point.getX()][point.getY()].getPiece();
   }
 
   isCellEmpty(point: Point): boolean {
-    throw new Error("Method not implemented.");
+    return this.cellArr[point.getX()][point.getY()].isEmpty();
   }
 
   clearCell(point: Point): void {
-    throw new Error("Method not implemented.");
+    this.cellArr[point.getX()][point.getY()].removePiece();
   }
 
-  setPiece(point: Point) {
-    throw new Error("Method not implemented.");
+  setPiece(point: Point, piece: Piece) {
+    this.cellArr[point.getX()][point.getY()].setPiece(piece);
   }
 
   copy(): Board {
