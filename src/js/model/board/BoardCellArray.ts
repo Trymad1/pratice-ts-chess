@@ -1,15 +1,21 @@
 import { Point } from "../Point";
 import { Piece } from "../piece/Piece";
 import { Board } from "./Board";
+import { Cell } from "./Cell";
 
 export class BoardCellArray implements Board {
 
-  private readonly width;
-  private readonly height;  
+  private readonly width: number;
+  private readonly height: number;  
+  private readonly cellArr: readonly Cell[][];
 
-  public constructor(width : number, height : number) {
+  public constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
+  }
+
+  public initCellArray(): void {
+    const array: Cell[][] = [];
   }
 
   getWidth(): number {

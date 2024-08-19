@@ -4,19 +4,9 @@ import { Piece } from "../piece/Piece";
 export class Cell {
 
   private piece: Piece | null;
-  private color: Color;
 
-  public constructor(color: Color) {
+  public constructor() {
     this.piece = null;
-    this.color = color;
-  }
-
-  public getColor(): Color {
-    return this.color;
-  }
-
-  public setColor(color: Color): void {
-    this.color = color;
   }
 
   public isEmpty(): boolean {
