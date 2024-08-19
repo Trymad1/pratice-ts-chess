@@ -12,25 +12,18 @@ export abstract class Piece {
 
   private color: Color;
   private pieceStr: string;
-  private img: String;
 
-  public constructor(color: Color, img: String, pieceStr: string) {
+  public constructor(color: Color, pieceStr: string) {
     this.color = color;
-    this.img = img;
     this.pieceStr = pieceStr;
   }
 
   // TODO think about how piece get allowed point and pieces for attack, and what is returns.
   // public abstract getAllowedPoints(piecePoint : Point);
 
-  public getImage(): string {
-    return this.img.toString();
-  }
-
   public getColor(): Color {
     return this.color;
   }
-
   public toString(): string {
     return this.pieceStr;
   }

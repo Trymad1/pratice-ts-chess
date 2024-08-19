@@ -46,7 +46,20 @@ export class BoardCellArray implements Board {
   }
 
   copy(): Board {
-    throw new Error("Method not implemented.");
+    const copyBoard: Board = new BoardCellArray(this.width, this.height);
+
+    for (let i = 0; i < this.height; i++) {
+      const row = this.cellArr[i];
+      
+      for(let j = 0; j < this.width; j++) {
+        const point: Point = new Point(j, i);
+        if(!this.isCellEmpty(point)) {
+          copyBoard.setPiece(point, this.getPiece(point)!);
+        }
+      }
+    }
+
+    return copyBoard;
   }
 
   toString(): string[][] {
