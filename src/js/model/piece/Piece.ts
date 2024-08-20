@@ -1,6 +1,15 @@
 import { Color, ColorUtil } from "../Color";
 import { Point } from "../Point";
 
+export enum PieceType {
+  PAWN = "pawn", 
+  KNIGHT = "knight", 
+  BISHOP = "bishop", 
+  ROOK = "rook", 
+  QUEEN = "queen", 
+  KING = "king"
+}
+
 export abstract class Piece {
 
   public static readonly PAWN_STR: string = "p"
@@ -12,10 +21,12 @@ export abstract class Piece {
 
   private color: Color;
   private pieceStr: string;
+  private pieceType: PieceType;
 
-  public constructor(color: Color, pieceStr: string) {
+  public constructor(color: Color, pieceStr: string, pieceType: PieceType) {
     this.color = color;
     this.pieceStr = pieceStr;
+    this.pieceType = pieceType;
   }
 
   // TODO think about how piece get allowed point and pieces for attack, and what is returns.
@@ -24,6 +35,11 @@ export abstract class Piece {
   public getColor(): Color {
     return this.color;
   }
+
+  public getType(): PieceType {
+    return this.pieceType;
+  }
+
   public toString(): string {
     return this.pieceStr;
   }

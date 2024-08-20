@@ -45,6 +45,7 @@ export class BoardCellArray implements Board {
     this.cellArr[point.getY()][point.getX()].setPiece(piece);
   }
 
+  // pieces not copy, maybe change it later if necessary
   copy(): Board {
     const copyBoard: Board = new BoardCellArray(this.width, this.height);
 
