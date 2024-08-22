@@ -48,24 +48,8 @@ export class BoardCellArray implements Board {
     return this.height;
   }
 
-  getPiece(point: Point): Piece | null {
-    return this.cellArr[point.getY()][point.getX()].getPiece();
-  }
-
-  getPieceById(id: number): Piece | null {
-    return null;
-  }
-
-  isCellEmpty(point: Point): boolean {
-    return this.cellArr[point.getY()][point.getX()].isEmpty();
-  }
-
-  clearCell(point: Point): void {
-    this.cellArr[point.getY()][point.getX()].removePiece();
-  }
-
-  setPiece(point: Point, piece: Piece) {
-    this.cellArr[point.getY()][point.getX()].setPiece(piece);
+  getCell(point: Point): Cell {
+    return this.cellArr[point.getY()][point.getX()];
   }
 
   // pieces not copy, maybe change it later if necessary
@@ -77,17 +61,13 @@ export class BoardCellArray implements Board {
       
       for(let j = 0; j < this.width; j++) {
         const point: Point = new Point(j, i);
-        if(!this.isCellEmpty(point)) {
-          copyBoard.setPiece(point, this.getPiece(point)!);
+        const currCell: Cell = this.getCell(point);
+        if(!currCell.isEmpty()) {
+          copyBoard.getCell(point).setPiece(currCell.getPiece()!)
         }
       }
     }
 
     return copyBoard;
-  }
-
-  toString(): string[][] {
-    return this.cellArr.map( row => 
-      row.map(cell => cell.toString()));
   }
 }

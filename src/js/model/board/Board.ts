@@ -1,5 +1,6 @@
 import { Point } from "../Point";
 import { Piece } from "../piece/Piece";
+import { Cell } from "./Cell";
 
 export interface Board {
 
@@ -7,17 +8,8 @@ export interface Board {
 
   getHeight(): number;
   
-  getPiece(point: Point): Piece | null;
-
-  getPieceById(id: number) : Piece | null;
-
-  isCellEmpty(point: Point): boolean;
-
-  clearCell(point: Point): void;
-
-  setPiece(point: Point, piece: Piece): void;
+  getCell(point: Point): Cell;
 
   copy(): Board;
 
-  toString(): string[][];
 }
