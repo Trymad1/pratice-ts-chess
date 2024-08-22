@@ -19,9 +19,25 @@ export class BoardCellArray implements Board {
   }
 
   private initCellArray(): Cell[][] {
-    return Array.from({ length: this.height }, () => 
-      Array.from({ length: this.width }, () => new Cell())
-    );
+    const newCellArr: Cell[][] = [];
+    let color: Color = Color.BLACK;
+    const changeColor = () => {
+      if(color == Color.WHITE) {
+        color = Color.BLACK;
+      } else {
+        color = Color.WHITE;
+      }
+    } 
+
+    for(let i: number = 0; i < this.height; i++) {
+      changeColor();
+      for(let j: number = 0; i < this.width; i++) {
+        newCellArr[j][i] = new Cell(color, new Point(i,j));
+        changeColor();
+      }
+    }
+
+    return newCellArr;
   }
 
   getWidth(): number {
@@ -49,7 +65,6 @@ export class BoardCellArray implements Board {
   }
 
   setPiece(point: Point, piece: Piece) {
-    if()
     this.cellArr[point.getY()][point.getX()].setPiece(piece);
   }
 

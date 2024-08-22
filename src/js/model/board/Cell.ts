@@ -1,12 +1,17 @@
 import { Color } from "../Color";
+import { Point } from "../Point";
 import { Piece } from "../piece/Piece";
 
 export class Cell {
 
   private piece: Piece | null;
+  private readonly point: Point;
+  private readonly color: Color;
 
-  public constructor() {
+  public constructor(color: Color, point: Point) {
     this.piece = null;
+    this.point = point;
+    this.color = color;
   }
 
   public isEmpty(): boolean {
@@ -29,7 +34,12 @@ export class Cell {
     return currentPiece;
   }
 
-  public toString(): string {
-    return this.piece == null ? "*" : this.piece.toString();
+  public getPoint(): Point {
+    return this.point;
   }
+
+  public getColor(): Color {
+    return this.color;
+  }
+
 }
