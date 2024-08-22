@@ -1,5 +1,4 @@
 import { Color, ColorUtil } from "../Color";
-import { Point } from "../Point";
 
 export enum PieceType {
   PAWN = "pawn", 
@@ -12,20 +11,12 @@ export enum PieceType {
 
 export abstract class Piece {
 
-  public static readonly PAWN_STR: string = "p"
-  public static readonly KNIGHT_STR: string = "n"
-  public static readonly BISHOP_STR: string = "b"
-  public static readonly ROOK_STR: string = "r"
-  public static readonly QUEEN_STR: string = "q"
-  public static readonly KING_STR: string = "k"
-
   private color: Color;
-  private pieceStr: string;
   private pieceType: PieceType;
+  private id: number;
 
-  public constructor(color: Color, pieceStr: string, pieceType: PieceType) {
+  public constructor(color: Color, pieceType: PieceType) {
     this.color = color;
-    this.pieceStr = pieceStr;
     this.pieceType = pieceType;
   }
 
@@ -40,7 +31,7 @@ export abstract class Piece {
     return this.pieceType;
   }
 
-  public toString(): string {
-    return this.pieceStr;
+  public getId(): number {
+    return this.id;
   }
 }

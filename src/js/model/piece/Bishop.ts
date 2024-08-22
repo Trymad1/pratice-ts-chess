@@ -4,6 +4,6 @@ import { Piece, PieceType } from "./Piece";
 export class Bishop extends Piece {
   
   constructor(color: Color) {
-    super(color, Piece.BISHOP_STR, PieceType.BISHOP);
+    super(color, PieceType.BISHOP);
   }
 }

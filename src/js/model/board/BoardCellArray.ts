@@ -1,3 +1,4 @@
+import { Color } from "../Color";
 import { Point } from "../Point";
 import { Piece } from "../piece/Piece";
 import { Board } from "./Board";
@@ -8,11 +9,13 @@ export class BoardCellArray implements Board {
   private readonly width: number;
   private readonly height: number;  
   private readonly cellArr: readonly Cell[][];
+  private readonly pieceIdDictionary: {[key: number]: Piece} 
 
   public constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
     this.cellArr = this.initCellArray();
+    this.pieceIdDictionary = {};
   }
 
   private initCellArray(): Cell[][] {
@@ -33,6 +36,10 @@ export class BoardCellArray implements Board {
     return this.cellArr[point.getY()][point.getX()].getPiece();
   }
 
+  getPieceById(id: number): Piece | null {
+    return null;
+  }
+
   isCellEmpty(point: Point): boolean {
     return this.cellArr[point.getY()][point.getX()].isEmpty();
   }
@@ -42,6 +49,7 @@ export class BoardCellArray implements Board {
   }
 
   setPiece(point: Point, piece: Piece) {
+    if()
     this.cellArr[point.getY()][point.getX()].setPiece(piece);
   }
 

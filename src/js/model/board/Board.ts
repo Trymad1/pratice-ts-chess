@@ -9,6 +9,8 @@ export interface Board {
   
   getPiece(point: Point): Piece | null;
 
+  getPieceById(id: number) : Piece | null;
+
   isCellEmpty(point: Point): boolean;
 
   clearCell(point: Point): void;
