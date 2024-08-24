@@ -22,7 +22,7 @@ function testDisplay(board: Board, storage: BoardViewStorage) {
 
       if(piece != null) {
         const pieceDiv = document.createElement("div");
-        pieceDiv.className = "piece";
+        pieceDiv.className = `piece ${piece.getColor()}`;
         pieceDiv.innerHTML = storage.getImageUrl(piece.getType()).toString();
         cellDiv.appendChild(pieceDiv);
       }

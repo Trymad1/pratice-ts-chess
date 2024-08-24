@@ -25,3 +25,13 @@
   width: 60px;
   height: 60px;
 }
+
+.piece.white {
+  background-color: transparent;
+  fill:lavenderblush
+}
+
+.piece.black {
+  background-color: transparent;
+  fill:black
+}
