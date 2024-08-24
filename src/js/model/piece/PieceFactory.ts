@@ -11,7 +11,7 @@ type Constructor<T> = new (...args: any[]) => T;
 
 export class PieceFactory {
   
-  private readonly pieceDictionary: { [key: string]: Constructor<Piece>} = {
+  private static readonly pieceDictionary: { [key: string]: Constructor<Piece>} = {
     "pawn" : Pawn,
     "knight" : Knight,
     "bishop" : Bishop,
@@ -20,7 +20,7 @@ export class PieceFactory {
     "king" : King
   }
 
-  public createPiece(pieceType: PieceType, color: Color): Piece {
+  public static createPiece(pieceType: PieceType, color: Color): Piece {
     return new this.pieceDictionary[pieceType](color);
   }
 
