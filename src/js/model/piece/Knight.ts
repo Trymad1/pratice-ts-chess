@@ -1,5 +1,5 @@
-import { Color } from "../Color";
-import { Piece, PieceType } from "./Piece";
+import { Color } from "../Color.js";
+import { Piece, PieceType } from "./Piece.js";
 
 export class Knight extends Piece {
   

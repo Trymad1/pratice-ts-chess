@@ -1,6 +1,6 @@
-import { Color } from "../Color";
-import { Point } from "../Point";
-import { Piece } from "../piece/Piece";
+import { Color } from "../Color.js";
+import { Point } from "../Point.js";
+import { Piece } from "../piece/Piece.js";
 
 export class Cell {
 

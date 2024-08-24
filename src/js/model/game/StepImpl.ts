@@ -1,7 +1,7 @@
-import { Point } from "../Point";
-import { Board } from "../board/Board";
-import { Piece } from "../piece/Piece";
-import { Step } from "./Step";
+import { Point } from "../Point.js";
+import { Board } from "../board/Board.js";
+import { Piece } from "../piece/Piece.js";
+import { Step } from "./Step.js";
 
 export class StepImpl implements Step {
 

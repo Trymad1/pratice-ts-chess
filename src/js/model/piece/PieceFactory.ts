@@ -1,11 +1,11 @@
-import { Color } from "../Color";
-import { Bishop } from "./Bishop";
-import { King } from "./King";
-import { Knight } from "./Knight";
-import { Pawn } from "./Pawn";
-import { Piece, PieceType } from "./Piece";
-import { Queen } from "./Queen";
-import { Rook } from "./Rook";
+import { Color } from "../Color.js";
+import { Bishop } from "./Bishop.js";
+import { King } from "./King.js";
+import { Knight } from "./Knight.js";
+import { Pawn } from "./Pawn.js";
+import { Piece, PieceType } from "./Piece.js";
+import { Queen } from "./Queen.js";
+import { Rook } from "./Rook.js";
 
 type Constructor<T> = new (...args: any[]) => T;
 

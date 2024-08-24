@@ -1,6 +1,5 @@
-import { Point } from "../Point";
-import { Piece } from "../piece/Piece";
-import { Cell } from "./Cell";
+import { Point } from "../Point.js";
+import { Cell } from "./Cell.js";
 
 export interface Board {
 

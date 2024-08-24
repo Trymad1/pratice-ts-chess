@@ -14,9 +14,14 @@
 }
 
 .black {
-  background-color: black;
+  background-color: gray;
 }
 
 .white {
   background-color: wheat;
+}
+
+.cell svg {
+  width: 60px;
+  height: 60px;
 }

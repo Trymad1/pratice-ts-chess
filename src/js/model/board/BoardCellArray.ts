@@ -1,8 +1,8 @@
-import { Color } from "../Color";
-import { Point } from "../Point";
-import { Piece } from "../piece/Piece";
-import { Board } from "./Board";
-import { Cell } from "./Cell";
+import { Color } from "../Color.js";
+import { Point } from "../Point.js";
+import { Piece } from "../piece/Piece.js";
+import { Board } from "./Board.js";
+import { Cell } from "./Cell.js";
 
 export class BoardCellArray implements Board {
 
@@ -31,8 +31,9 @@ export class BoardCellArray implements Board {
 
     for(let i: number = 0; i < this.height; i++) {
       changeColor();
-      for(let j: number = 0; i < this.width; i++) {
-        newCellArr[j][i] = new Cell(color, new Point(i,j));
+      newCellArr[i] = [];
+      for(let j: number = 0; j < this.width; j++) {
+        newCellArr[i][j] = new Cell(color, new Point(i,j));
         changeColor();
       }
     }

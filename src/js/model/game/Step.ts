@@ -1,6 +1,6 @@
-import { Point } from "../Point";
-import { Board } from "../board/Board";
-import { Piece } from "../piece/Piece";
+import { Point } from "../Point.js";
+import { Board } from "../board/Board.js";
+import { Piece } from "../piece/Piece.js";
 
 export interface Step {
 

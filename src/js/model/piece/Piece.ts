@@ -1,4 +1,4 @@
-import { Color, ColorUtil } from "../Color";
+import { Color } from "../Color.js";
 
 export enum PieceType {
   PAWN = "pawn", 
@@ -13,7 +13,6 @@ export abstract class Piece {
 
   private color: Color;
   private pieceType: PieceType;
-  private id: number;
 
   public constructor(color: Color, pieceType: PieceType) {
     this.color = color;
@@ -29,9 +28,5 @@ export abstract class Piece {
 
   public getType(): PieceType {
     return this.pieceType;
-  }
-
-  public getId(): number {
-    return this.id;
   }
 }
