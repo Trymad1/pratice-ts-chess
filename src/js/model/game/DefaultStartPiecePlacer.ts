@@ -5,6 +5,7 @@ import { PieceType } from "../piece/Piece.js";
 import { PieceFactory } from "../piece/PieceFactory.js";
 import { StartPiecePlacer } from "./StartPiecePlacer.js";
 
+// fix bug if boardSice not 8x8
 export class DefaultStartPiecePlacer implements StartPiecePlacer {
 
   placePieces(board: Board): void {

@@ -4,5 +4,4 @@ export interface StartPiecePlacer {
 
   placePieces(board: Board): void;
 
-
 }
