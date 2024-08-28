@@ -31,8 +31,20 @@ function testDisplay(board: Board, storage: BoardViewStorage) {
   } 
 }
 
-let board: Board = new BoardCellArray(8,8);
-let startPiece: StartPiecePlacer = new DefaultStartPiecePlacer();
-startPiece.placePieces(board);
-testDisplay(board, new BoardViewStorage());
+// let board: Board = new BoardCellArray(8,8);
+// let startPiece: StartPiecePlacer = new DefaultStartPiecePlacer();
+// startPiece.placePieces(board);
+// testDisplay(board, new BoardViewStorage());
+
+let colorStylesDictionary: { [key: string]: string } = {
+  "white" : 'lavenderblush', 
+  "black" : 'black'
+};
+
+let etst = colorStylesDictionary['sss'];
+let white = 'white';
+if(white in colorStylesDictionary) {
+  console.log('white in')
+}
+console.log(etst);
 
