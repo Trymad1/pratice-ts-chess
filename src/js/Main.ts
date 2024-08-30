@@ -6,7 +6,7 @@ import { BoardViewController } from "./model/view/BoardViewController.js";
 
 // code for test, change in future
 
-const boardViewController: BoardViewController = new BoardViewController();
+const boardViewController: BoardViewController = new BoardViewController(document.querySelector('.board')!);
 const startPiecePlacer: StartPiecePlacer = new DefaultStartPiecePlacer();
 const board: Board = new BoardCellArray(8,8);
 

@@ -5,7 +5,7 @@ export interface PieceViewFactory {
 
   getImage(pieceType: PieceType, color: Color): string;
 
-  getStyle(pieceType: PieceType, color: Color): Record<string, string>;
+  getStyle(color: Color): string;
 
   isColorChangeable(): boolean;
 
