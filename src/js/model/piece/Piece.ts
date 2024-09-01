@@ -49,15 +49,9 @@ export abstract class Piece {
   public getId(): string {
     return this.uuid;
   }
-  
-  public move(targetCell: Cell) {
-    if(!targetCell.isEmpty()) {
-      if(targetCell.getPiece()?.getColor() == this.getColor()) {
-        console.log('not enemy piece error');
-        return;
-      } else {
-        targetCell.getPiece()
-      }
-    }
+
+  public move(targetCell: Cell) : Piece | null {
+    const anotherPiece: Piece | null = targetCell.setPiece(this);
+    return anotherPiece;
   }
 }
