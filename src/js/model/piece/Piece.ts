@@ -1,7 +1,7 @@
 import { Color } from "../Color.js";
 import { Board } from "../board/Board.js";
 import { Cell } from "../board/Cell.js";
-import { v4 as uuidv4 } from 'uuid';
+
 export enum PieceType {
   PAWN = "pawn", 
   KNIGHT = "knight", 
@@ -22,7 +22,13 @@ export abstract class Piece {
     this.color = color;
     this.pieceType = pieceType;
     this.cell = null;
-    this.uuid = uuidv4();
+    this.uuid = this.generateId();
+  }
+
+  private generateId(): string {
+    const timestamp = Date.now().toString(36);
+    const randomString = Math.random().toString(36).substr(2, 9);
+    return `${timestamp}-${randomString}`;
   }
 
   public abstract getAvailableCellToMove(board: Board, pieceCell: Cell): Cell[];

@@ -11,4 +11,5 @@ export interface Board {
 
   copy(): Board;
 
+  inBorder(point: Point): boolean;
 }

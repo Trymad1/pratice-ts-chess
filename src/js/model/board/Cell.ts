@@ -1,7 +1,6 @@
 import { Color } from "../Color.js";
 import { Point } from "../Point.js";
 import { Piece } from "../piece/Piece.js";
-import { v4 as uuidv4 } from 'uuid';
 
 export class Cell {
 
@@ -14,7 +13,13 @@ export class Cell {
     this.piece = null;
     this.point = point;
     this.color = color;
-    this.uuid = uuidv4();
+    this.uuid = this.generateId();
+  }
+
+  private generateId(): string {
+    const timestamp = Date.now().toString(36);
+    const randomString = Math.random().toString(36).substr(2, 9);
+    return `${timestamp}-${randomString}`;
   }
 
   public isEmpty(): boolean {

@@ -33,7 +33,7 @@ export class BoardCellArray implements Board {
       changeColor();
       newCellArr[i] = [];
       for(let j: number = 0; j < this.width; j++) {
-        newCellArr[i][j] = new Cell(color, new Point(i,j));
+        newCellArr[i][j] = new Cell(color, new Point(j,i));
         changeColor();
       }
     }
@@ -51,6 +51,16 @@ export class BoardCellArray implements Board {
 
   getCell(point: Point): Cell {
     return this.cellArr[point.getY()][point.getX()];
+  }
+
+  inBorder(point: Point): boolean {
+    const x = point.getX();
+    const y = point.getY();
+
+    if(x < 0 || x >= this.width) return false;
+    if(y < 0 || y >= this.height) return false;
+
+    return true;
   }
 
   // pieces not copy, maybe change it later if necessary

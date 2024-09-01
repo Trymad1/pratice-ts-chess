@@ -11,23 +11,31 @@ export class Pawn extends Piece {
     super(color, PieceType.PAWN);
   }
   
-  public getAvailableCellToMove(board: Board, pieceCell: Cell): Cell[] {
+  public getAvailableCellToMove(board: Board): Cell[] {
     const boardWidth = board.getWidth();
     const boardHeight = board.getHeight();
     const availableCells: Cell[] = [];
-    const cellPoint: Point = pieceCell.getPoint();
+    const cellPoint: Point = this.getCell()!.getPoint();
+    const directionY: number = this.getColor() == Color.WHITE ? -1 : 1;
     
-    for(let i = cellPoint.getX() - 1; i < cellPoint.getX() + 2 && cellPoint.getY() != boardHeight - 1; i + 2) {
-      if(i < 0 || i >= boardWidth) continue;
-      const cell = board.getCell(new Point(i, cellPoint.getY() + 1));
-      if(!cell.isEmpty()) availableCells.push(cell);
+    for(let i: number = cellPoint.getX() - 1; i < cellPoint.getX() + 2; i += 2) {
+      const point: Point = new Point(i, cellPoint.getY() + directionY);
+      console.log(point.getX() + " " + point.getY());
+      if(!board.inBorder(point)) {
+        console.log('not in border');
+        continue;
+      }
+
+      const cell: Cell = board.getCell(point);
+      if(!cell.isEmpty()) {
+        availableCells.push(cell);
+      }
     }
 
-    for(let i = cellPoint.getY() + 1; i < boardHeight - 1; i++) {
-      const nextCell = board.getCell(new Point(cellPoint.getX(), i));
-      if(nextCell.isEmpty()) {
-        availableCells.push(nextCell);
-      }
+    for(let i: number = 1; i < 3; i += 1) {
+      const point = new Point(cellPoint.getX(), cellPoint.getY() + (directionY * i));
+      if(!board.inBorder(point) || !board.getCell(point).isEmpty()) break;
+      availableCells.push(board.getCell(point));
     }
 
     return availableCells;
