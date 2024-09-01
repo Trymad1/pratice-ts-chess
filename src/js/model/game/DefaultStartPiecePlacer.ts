@@ -26,7 +26,6 @@ export class DefaultStartPiecePlacer implements StartPiecePlacer {
 
   private placeRocks(board: Board): void {
     for(let i = 0; i < 9; i += 7) {
-      console.log('create rook' + i)
       board.getCell(new Point(i, 0)).setPiece(PieceFactory.createPiece(PieceType.ROOK, Color.BLACK));
       board.getCell(new Point(i, 7)).setPiece(PieceFactory.createPiece(PieceType.ROOK, Color.WHITE))
     }

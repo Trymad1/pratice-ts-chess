@@ -12,10 +12,11 @@ export class BoardViewController {
   private pieceViewFactory: PieceViewFactory;
   private board: Board;
   private boardDiv: HTMLDivElement;
+  private cellsDictionatry: {[key: string] : Cell} = { } 
 
-  public constructor(boardDiv: HTMLDivElement) {
+  public constructor(boardDiv: HTMLDivElement, board: Board) {
     this.pieceViewFactory = new DefaultSvgPieceViewFactory();
-    this.board = new BoardCellArray(8, 8); // TODO hardcode, change to init default board another way
+    this.board = board;
     this.boardDiv = boardDiv;
   }
 
@@ -72,6 +73,7 @@ export class BoardViewController {
   private createCellDiv(cell: Cell): HTMLDivElement {
     const cellDiv = document.createElement("div");
     cellDiv.className = `cell ${cell.getColor()}`;
+    cellDiv.id = cell.getId();
     this.addEventListenersToCellDiv(cellDiv);
     return cellDiv;
   }
