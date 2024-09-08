@@ -53,7 +53,7 @@ export class Cell {
   }
 
   public getPoint(): Point {
-    return this.point;
+    return new Point(this.point.getX(), this.point.getY());
   }
 
   public getColor(): Color {

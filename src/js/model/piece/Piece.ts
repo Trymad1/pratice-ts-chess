@@ -11,6 +11,9 @@ export enum PieceType {
   KING = "king"
 }
 
+// проверка всех возможных ходов фигур
+// король под шахом?
+
 export abstract class Piece {
 
   private color: Color;

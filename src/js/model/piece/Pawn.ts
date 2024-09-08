@@ -6,7 +6,8 @@ import { Piece, PieceType } from "./Piece.js";
 
 export class Pawn extends Piece {
 
-  
+  private isMoved: boolean = false;
+
   constructor(color: Color) {
     super(color, PieceType.PAWN);
   }
@@ -22,17 +23,22 @@ export class Pawn extends Piece {
       const point: Point = new Point(i, cellPoint.getY() + directionY);
       console.log(point.getX() + " " + point.getY());
       if(!board.inBorder(point)) {
-        console.log('not in border');
         continue;
       }
 
       const cell: Cell = board.getCell(point);
-      if(!cell.isEmpty()) {
+      if(!cell.isEmpty() && cell.getPiece()?.getColor() != this.getColor()) {
         availableCells.push(cell);
       }
     }
 
-    for(let i: number = 1; i < 3; i += 1) {
+    let numberOfSteps = 1;
+    if(!this.isMoved) {
+      numberOfSteps++;
+      this.isMoved = !this.isMoved;
+    }
+
+    for(let i: number = 1; i < 1 + numberOfSteps; i += 1) {
       const point = new Point(cellPoint.getX(), cellPoint.getY() + (directionY * i));
       if(!board.inBorder(point) || !board.getCell(point).isEmpty()) break;
       availableCells.push(board.getCell(point));
