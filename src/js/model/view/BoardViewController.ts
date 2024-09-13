@@ -92,52 +92,70 @@ export class BoardViewController {
 
   private addEventListenersToCellDiv(cellDiv: HTMLDivElement) {
     cellDiv.addEventListener('click', () => {
-      if(this.takedPiece == null && this.isCellEmpty(cellDiv)) return;
-      if(this.takedPiece == null) {
-        this.takedPiece = this.getPieceFromCell(cellDiv);
-        const piece: Piece = this.pieceHook[this.takedPiece!.id];
-        const cell: Cell = this.cellHook[cellDiv.id];
-        this.availableCells = piece.getAvailableCellToMove(this.board, cell);
-        this.availableCells.forEach(cell => {
-          const cellDiv = this.cellDivHook[cell.getId()];
-          cellDiv.classList.add('canmove');
-        })
-        
-      } else {
-        const cell: Cell = this.cellHook[cellDiv.id];
-        if(!this.availableCells.includes(cell)) {
-          this.availableCells.forEach(cell => {
-            const cellDiv = this.cellDivHook[cell.getId()];
-            cellDiv.classList.remove('canmove');
-            this.availableCells = [];
-          })
-          this.takedPiece = null;
-          return;
-        }
-        const piece = this.pieceHook[this.takedPiece.id];
-        piece.move(cell);
+      if(this.takedPiece == null) return;
+      console.log('divevent')
+      if(this.availableCells.includes(this.cellHook[cellDiv.id])) {
+        this.movePieceToCell(this.takedPiece, cellDiv);
 
-        const parentChild = this.takedPiece?.parentElement;
-        if(this.getPieceFromCell(cellDiv) != null) {
-          cellDiv.removeChild(this.getPieceFromCell(cellDiv)!);
-        }
-        
-        parentChild?.removeChild(this.takedPiece!);
-        cellDiv.appendChild(this.takedPiece!);
-        this.takedPiece = null;
-        this.availableCells.forEach(cell => {
-          const cellDiv = this.cellDivHook[cell.getId()];
-          cellDiv.classList.remove('canmove');
-          this.availableCells = [];
-        })
-      }
+        //maybe need refactor in future, board manipulates on separate class
+        this.pieceHook[this.takedPiece.id].move(this.cellHook[cellDiv.id]) 
+
+      } 
+      this.takedPiece = null;
+      this.clearAvailablePoints();
+    }, true);
+  }
+
+  private addEventListenersToPieceDiv(pieceDiv: HTMLDivElement) {
+    pieceDiv.addEventListener('click', () => {
+      if(this.takedPiece != null) return;
+      console.log('pieceEvent')
+      this.takedPiece = pieceDiv;
+      this.selectAvailableCells(pieceDiv);
+    })
+  }
+
+  private movePieceToCell(pieceDiv: HTMLDivElement, cellDiv: HTMLDivElement): HTMLDivElement | null {
+    this.getCellFromPiece(pieceDiv)?.removeChild(pieceDiv);
+    const pieceFromTargetDiv: HTMLDivElement | null = this.getPieceFromCell(cellDiv)
+    if(pieceFromTargetDiv != null) {
+      cellDiv.removeChild(pieceFromTargetDiv);
+    }
+    cellDiv.appendChild(pieceDiv);
+    return pieceFromTargetDiv;
+  }
+
+  private selectAvailableCells(pieceDiv: HTMLDivElement): void {
+    if(this.availableCells.length > 0) {
+      console.log('clear')
+      this.clearAvailablePoints();
+    }
+
+    const piece: Piece = this.pieceHook[this.takedPiece!.id];
+    const cell: Cell = this.cellHook[this.getCellFromPiece(pieceDiv)!.id];
+    this.availableCells = piece.getAvailableCellToMove(this.board, cell);
+    this.availableCells.forEach(cell => {
+      const cellDiv = this.cellDivHook[cell.getId()];
+      cellDiv.classList.add('canmove');
+      this.availableCells.push(cell);
     });
+  }
+
+  private clearAvailablePoints(): void {
+    this.availableCells.forEach(cell => {
+      const cellDiv = this.cellDivHook[cell.getId()];
+      cellDiv.classList.remove('canmove');
+    })
+    this.availableCells = [];
   }
 
   private getPieceFromCell(cellDiv: HTMLDivElement): HTMLDivElement | null {
     return cellDiv.firstElementChild as HTMLDivElement;
   }
 
+  private getCellFromPiece(pieceDiv: HTMLDivElement): HTMLDivElement | null {
+    return pieceDiv.parentElement as HTMLDivElement;
+  }
 
   private createPieceDiv(piece: Piece): HTMLDivElement {
     const pieceDiv = document.createElement("div");
@@ -148,6 +166,7 @@ export class BoardViewController {
     pieceDiv.innerHTML = this.pieceViewFactory.getImage(piece.getType(), piece.getColor());
     this.pieceHook[pieceId] = piece;
     this.pieceDivHook[pieceId] = pieceDiv;
+    this.addEventListenersToPieceDiv(pieceDiv);
     return pieceDiv;
   }
 }
