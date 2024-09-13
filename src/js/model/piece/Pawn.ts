@@ -32,12 +32,7 @@ export class Pawn extends Piece {
       }
     }
 
-    let numberOfSteps = 1;
-    if(!this.isMoved) {
-      numberOfSteps++;
-      this.isMoved = !this.isMoved;
-    }
-
+    const numberOfSteps = this.isMoved ? 1 : 2;
     for(let i: number = 1; i < 1 + numberOfSteps; i += 1) {
       const point = new Point(cellPoint.getX(), cellPoint.getY() + (directionY * i));
       if(!board.inBorder(point) || !board.getCell(point).isEmpty()) break;
@@ -47,4 +42,8 @@ export class Pawn extends Piece {
     return availableCells;
   }
 
+  public move(targetCell: Cell): Piece | null {
+    this.isMoved = true;
+    return super.move(targetCell);
+  }
 }

@@ -36,9 +36,6 @@ export abstract class Piece {
 
   public abstract getAvailableCellToMove(board: Board, pieceCell: Cell): Cell[];
 
-  // TODO think about how piece get allowed point and pieces for attack, and what is returns.
-  // public abstract getAllowedPoints(piecePoint : Point);
-
   public getColor(): Color {
     return this.color;
   }
