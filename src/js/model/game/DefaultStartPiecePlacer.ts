@@ -5,6 +5,7 @@ import { PieceType } from "../piece/Piece.js";
 import { PieceFactory } from "../piece/PieceFactory.js";
 import { StartPiecePlacer } from "./StartPiecePlacer.js";
 
+// fix bug if boardSice not 8x8
 export class DefaultStartPiecePlacer implements StartPiecePlacer {
 
   placePieces(board: Board): void {
@@ -25,7 +26,6 @@ export class DefaultStartPiecePlacer implements StartPiecePlacer {
 
   private placeRocks(board: Board): void {
     for(let i = 0; i < 9; i += 7) {
-      console.log('create rook' + i)
       board.getCell(new Point(i, 0)).setPiece(PieceFactory.createPiece(PieceType.ROOK, Color.BLACK));
       board.getCell(new Point(i, 7)).setPiece(PieceFactory.createPiece(PieceType.ROOK, Color.WHITE))
     }

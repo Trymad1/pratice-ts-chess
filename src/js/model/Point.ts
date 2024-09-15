@@ -20,6 +20,14 @@ export class Point {
     this.x = x;
   }
 
+  public addToX(value: number): void {
+    this.x += value
+  }
+
+  public addToY(value: number): void {
+    this.y += value;
+  }
+
   public setY(y: number): void {
     this.y = y;
   }

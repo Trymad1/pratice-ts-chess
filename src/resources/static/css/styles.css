@@ -26,7 +26,11 @@
   height: 60px;
 }
 
-.piece.white {
+.canmove {
+  box-shadow: 0 0 0 2px green; /* Зеленая обводка */
+}
+
+/* .piece.white {
   background-color: transparent;
   fill:lavenderblush
 }
@@ -34,4 +38,4 @@
 .piece.black {
   background-color: transparent;
   fill:black
-}
+} */
