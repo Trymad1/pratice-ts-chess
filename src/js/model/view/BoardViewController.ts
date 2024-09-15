@@ -93,7 +93,6 @@ export class BoardViewController {
   private addEventListenersToCellDiv(cellDiv: HTMLDivElement) {
     cellDiv.addEventListener('click', () => {
       if(this.takedPiece == null) return;
-      console.log('divevent')
       if(this.availableCells.includes(this.cellHook[cellDiv.id])) {
         this.movePieceToCell(this.takedPiece, cellDiv);
 
@@ -109,7 +108,6 @@ export class BoardViewController {
   private addEventListenersToPieceDiv(pieceDiv: HTMLDivElement) {
     pieceDiv.addEventListener('click', () => {
       if(this.takedPiece != null) return;
-      console.log('pieceEvent')
       this.takedPiece = pieceDiv;
       this.selectAvailableCells(pieceDiv);
     })
