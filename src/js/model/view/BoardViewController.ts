@@ -5,6 +5,7 @@ import { DefaultSvgPieceViewFactory } from "./DefaultSvgPieceViewFactory.js";
 import { PieceViewFactory } from "./PieceViewFactory.js";
 import { Point } from "../Point.js";
 import { Color } from "../Color.js";
+import { CatPngPieceViewFactory } from "./CatPngPieceViewFactory.js";
 
 export class BoardViewController {
 
@@ -17,7 +18,7 @@ export class BoardViewController {
   private pieceDivHook: {[key: string] : HTMLDivElement } = { };
 
   public constructor(boardDiv: HTMLDivElement, board: Board) {
-    this.pieceViewFactory = new DefaultSvgPieceViewFactory();
+    this.pieceViewFactory = new CatPngPieceViewFactory();
     this.board = board;
     this.boardDiv = boardDiv;
   }
