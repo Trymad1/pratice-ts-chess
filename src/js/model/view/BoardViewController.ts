@@ -126,11 +126,12 @@ export class BoardViewController {
 
   private selectAvailableCells(pieceDiv: HTMLDivElement): void {
     if(this.availableCells.length > 0) {
-      console.log('clear')
       this.clearAvailablePoints();
     }
 
     const piece: Piece = this.pieceHook[this.takedPiece!.id];
+    const cellDiv: HTMLDivElement | null = this.getCellFromPiece(pieceDiv);
+    if(cellDiv === null) return; // if piece eat another piece, this listener dont need to work.
     const cell: Cell = this.cellHook[this.getCellFromPiece(pieceDiv)!.id];
     this.availableCells = piece.getAvailableCellToMove(this.board, cell);
     this.availableCells.forEach(cell => {

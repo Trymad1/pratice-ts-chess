@@ -11,6 +11,8 @@ export class CatPngPieceViewFactory implements PieceViewFactory {
   private readonly BISHOP_PNG: string = 'bishop';
   private readonly KNIGHT_PNG: string = 'knight';
 
+  private readonly PATH_TO_IMG: string = '../img/meow/'
+
   private readonly pieceDictionary: { [key: string]: string} = {
     "pawn" : this.PAWN_PNG,
     "knight" : this.KNIGHT_PNG,
@@ -21,7 +23,7 @@ export class CatPngPieceViewFactory implements PieceViewFactory {
   }
 
   getImage(pieceType: PieceType, color: Color): string {
-    return `<img src='../img/meow/${this.pieceDictionary[pieceType]}_${color}.png'>`
+    return `<img src='${this.PATH_TO_IMG}${this.pieceDictionary[pieceType]}_${color}.png'>`
   }
   getStyle(color: Color): string {
     return "background-color: transparent;";
