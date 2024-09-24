@@ -10,7 +10,7 @@ export class King extends Piece {
     super(color, PieceType.KING);
   }
 
-  public getAvailableCellToMove(board: Board, pieceCell: Cell): Cell[] {
+  public getAvailableCellToMove(board: Board): Cell[] {
     const currentPoint: Point = this.getCell()!.getPoint();
     const pointArr: Point[] = []
 
