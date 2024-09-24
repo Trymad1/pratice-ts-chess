@@ -9,6 +9,9 @@ import { StartPiecePlacer } from "./StartPiecePlacer.js";
 export class DefaultStartPiecePlacer implements StartPiecePlacer {
 
   placePieces(board: Board): void {
+    if(board.getWidth() != 8 || board.getHeight() != 8) {
+      throw Error('board size must be 8x8')
+    }
     this.placePawns(board);
     this.placeRocks(board);
     this.placeBishops(board);
