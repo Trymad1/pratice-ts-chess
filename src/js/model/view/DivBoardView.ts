@@ -1,13 +1,12 @@
 import { Board } from "../board/Board.js";
 import { Cell } from "../board/Cell.js";
 import { Piece, PieceType } from "../piece/Piece.js";
-import { DefaultSvgPieceViewFactory } from "./DefaultSvgPieceViewFactory.js";
 import { PieceViewFactory } from "./PieceViewFactory.js";
 import { Point } from "../Point.js";
 import { Color } from "../Color.js";
 import { CatPngPieceViewFactory } from "./CatPngPieceViewFactory.js";
 
-export class BoardViewController {
+export class DivBoardView {
 
   private pieceViewFactory: PieceViewFactory;
   private board: Board;
@@ -114,7 +113,7 @@ export class BoardViewController {
     })
   }
 
-  private movePieceToCell(pieceDiv: HTMLDivElement, cellDiv: HTMLDivElement): HTMLDivElement | null {
+  public movePieceToCell(pieceDiv: HTMLDivElement, cellDiv: HTMLDivElement): HTMLDivElement | null {
     this.getCellFromPiece(pieceDiv)?.removeChild(pieceDiv);
     const pieceFromTargetDiv: HTMLDivElement | null = this.getPieceFromCell(cellDiv)
     if(pieceFromTargetDiv != null) {
@@ -133,7 +132,7 @@ export class BoardViewController {
     const cellDiv: HTMLDivElement | null = this.getCellFromPiece(pieceDiv);
     if(cellDiv === null) return; // if piece eat another piece, this listener dont need to work.
     const cell: Cell = this.cellHook[this.getCellFromPiece(pieceDiv)!.id];
-    this.availableCells = piece.getAvailableCellToMove(this.board, cell);
+    this.availableCells = piece.getAvailableCellToMove(this.board);
     this.availableCells.forEach(cell => {
       const cellDiv = this.cellDivHook[cell.getId()];
       cellDiv.classList.add('canmove');
