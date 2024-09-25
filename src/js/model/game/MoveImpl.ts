@@ -35,3 +35,43 @@ export class MoveImpl implements Move {
   }
 
 }
+
+export class MoveBuilder {
+  
+  public constructor() { };
+
+  private  movedPieceField: Piece;
+  private targetCellField: Cell;
+  private startCellField: Cell;
+  private eatenPieceField: Piece | null;
+
+
+  public movedPiece(piece: Piece): MoveBuilder {
+    this.movedPieceField = piece;
+    return this;
+  }
+
+  public targetCell(cell: Cell): MoveBuilder {
+    this.targetCellField = cell;
+    return this;
+  }
+
+  public startCell(cell: Cell): MoveBuilder {
+    this.startCellField = cell;
+    return this;
+  }
+
+  public eatenPiece(piece: Piece): MoveBuilder {
+    this.eatenPieceField = piece;
+    return this;
+  }
+
+  public build(): Move {
+    return new MoveImpl(
+      this.movedPieceField, 
+      this.targetCellField, 
+      this.startCellField, 
+      this.eatenPieceField
+    )
+  }
+ }
