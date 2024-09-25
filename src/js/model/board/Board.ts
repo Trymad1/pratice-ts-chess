@@ -9,7 +9,5 @@ export interface Board {
   
   getCell(point: Point): Cell;
 
-  copy(): Board;
-
   inBorder(point: Point): boolean;
 }

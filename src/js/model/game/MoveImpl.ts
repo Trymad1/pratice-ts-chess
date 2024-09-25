@@ -40,7 +40,7 @@ export class MoveBuilder {
   
   public constructor() { };
 
-  private  movedPieceField: Piece;
+  private movedPieceField: Piece;
   private targetCellField: Cell;
   private startCellField: Cell;
   private eatenPieceField: Piece | null;

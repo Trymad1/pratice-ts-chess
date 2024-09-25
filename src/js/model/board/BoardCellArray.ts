@@ -62,23 +62,5 @@ export class BoardCellArray implements Board {
 
     return true;
   }
-
-  // pieces not copy, maybe change it later if necessary
-  copy(): Board {
-    const copyBoard: Board = new BoardCellArray(this.width, this.height);
-
-    for (let i = 0; i < this.height; i++) {
-      const row = this.cellArr[i];
-      
-      for(let j = 0; j < this.width; j++) {
-        const point: Point = new Point(j, i);
-        const currCell: Cell = this.getCell(point);
-        if(!currCell.isEmpty()) {
-          copyBoard.getCell(point).setPiece(currCell.getPiece()!)
-        }
-      }
-    }
-
-    return copyBoard;
-  }
+  
 }
