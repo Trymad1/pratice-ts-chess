@@ -9,5 +9,8 @@ export interface Board {
   
   getCell(point: Point): Cell;
 
+  getAllCells(): Cell[];
+
   inBorder(point: Point): boolean;
+
 }

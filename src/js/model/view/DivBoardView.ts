@@ -38,22 +38,19 @@ export class DivBoardView {
     
     const pieceColorOnBoard: Color[] = [];
 
-    for(let i = 0; i < 8; i++) {
-      for(let j = 0; j < 8; j++) {
-        const cell: Cell = this.board.getCell(new Point(j,i));
-        const piece: Piece | null = cell.getPiece();
+    this.board.getAllCells().forEach(cell => {
+      const piece: Piece | null = cell.getPiece();
 
-        const cellDiv: HTMLDivElement = this.createCellDiv(cell);
-        this.boardDiv.appendChild(cellDiv);
-  
-        if(piece != null) {
-          const pieceColor = piece.getColor();
-          if(!pieceColorOnBoard.includes(pieceColor)) pieceColorOnBoard.push(pieceColor);
-          const pieceDiv: HTMLDivElement = this.createPieceDiv(piece);
-          cellDiv.appendChild(pieceDiv);
-        }
+      const cellDiv: HTMLDivElement = this.createCellDiv(cell);
+      this.boardDiv.appendChild(cellDiv);
+
+      if(piece != null) {
+        const pieceColor = piece.getColor();
+        if(!pieceColorOnBoard.includes(pieceColor)) pieceColorOnBoard.push(pieceColor);
+        const pieceDiv: HTMLDivElement = this.createPieceDiv(piece);
+        cellDiv.appendChild(pieceDiv);
       }
-    }
+    });
 
     let styleSheet: HTMLStyleElement | null = document.getElementById('dynamicPieceStyle') as HTMLStyleElement;
 

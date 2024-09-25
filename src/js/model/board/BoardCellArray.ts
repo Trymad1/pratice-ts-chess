@@ -9,13 +9,23 @@ export class BoardCellArray implements Board {
   private readonly width: number;
   private readonly height: number;  
   private readonly cellArr: readonly Cell[][];
-  private readonly pieceIdDictionary: {[key: number]: Piece} 
 
   public constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
     this.cellArr = this.initCellArray();
-    this.pieceIdDictionary = {};
+  }
+
+  getAllCells(): Cell[] {
+    const cellArr: Cell[] = [];
+    
+    for(let i = 0; i < 8; i++) {
+      for(let j = 0; j < 8; j++) {
+        cellArr.push(this.getCell(new Point(j,i)));
+      }
+    }
+
+    return cellArr;
   }
 
   private initCellArray(): Cell[][] {
