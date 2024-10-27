@@ -9,7 +9,7 @@ export class DefaultPiecePlacer implements PiecePlacer {
 
   placePieces(pieceMap: Map<Point, Piece>, board: Board): void {
     pieceMap.forEach((piece, point) => {
-      piece.move(board.getCell(point))
+      board.getCell(point).setPiece(piece);
     })
   }
 

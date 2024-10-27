@@ -4,7 +4,7 @@ import { Piece, PieceType } from "../piece/Piece.js";
 import { PieceViewFactory } from "./PieceViewFactory.js";
 import { Point } from "../Point.js";
 import { Color } from "../Color.js";
-import { CatPngPieceViewFactory } from "./CatPngPieceViewFactory.js";
+import { DefaultSvgPieceViewFactory } from "./DefaultSvgPieceViewFactory.js";
 
 export class DivBoardView {
 
@@ -17,7 +17,7 @@ export class DivBoardView {
   private pieceDivHook: {[key: string] : HTMLDivElement } = { };
 
   public constructor(boardDiv: HTMLDivElement, board: Board) {
-    this.pieceViewFactory = new CatPngPieceViewFactory();
+    this.pieceViewFactory = new DefaultSvgPieceViewFactory();
     this.board = board;
     this.boardDiv = boardDiv;
   }
@@ -84,6 +84,7 @@ export class DivBoardView {
   private isCellEmpty(cellDiv: HTMLDivElement): boolean{
     return !cellDiv.hasChildNodes();
   }
+  
   private takedPiece: HTMLDivElement | null = null;
   private availableCells: Cell[] = [];
 
