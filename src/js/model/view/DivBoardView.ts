@@ -5,6 +5,7 @@ import { PieceViewFactory } from "./PieceViewFactory.js";
 import { Point } from "../Point.js";
 import { Color } from "../Color.js";
 import { DefaultSvgPieceViewFactory } from "./DefaultSvgPieceViewFactory.js";
+import { GameManager } from "../game/GameManager.js";
 
 export class DivBoardView {
 
@@ -15,11 +16,15 @@ export class DivBoardView {
   private pieceHook: {[key: string] : Piece} = { } 
   private cellDivHook: { [key: string] : HTMLDivElement } = { };
   private pieceDivHook: {[key: string] : HTMLDivElement } = { };
+  
+  private gameManagerTest: GameManager;
 
   public constructor(boardDiv: HTMLDivElement, board: Board) {
     this.pieceViewFactory = new DefaultSvgPieceViewFactory();
     this.board = board;
     this.boardDiv = boardDiv;
+    
+    this.gameManagerTest = new GameManager(board);
   }
 
   setPieceViewFactory(factory: PieceViewFactory): void {
@@ -84,7 +89,7 @@ export class DivBoardView {
   private isCellEmpty(cellDiv: HTMLDivElement): boolean{
     return !cellDiv.hasChildNodes();
   }
-  
+
   private takedPiece: HTMLDivElement | null = null;
   private availableCells: Cell[] = [];
 
@@ -95,7 +100,8 @@ export class DivBoardView {
         this.movePieceToCell(this.takedPiece, cellDiv);
 
         //maybe need refactor in future, board manipulates on separate class
-        this.pieceHook[this.takedPiece.id].move(this.cellHook[cellDiv.id]) 
+        let eaten: Piece | null = this.pieceHook[this.takedPiece.id].move(this.cellHook[cellDiv.id]) 
+        this.gameManagerTest.eatenPiece(eaten);
 
       } 
       this.takedPiece = null;
@@ -130,7 +136,7 @@ export class DivBoardView {
     const cellDiv: HTMLDivElement | null = this.getCellFromPiece(pieceDiv);
     if(cellDiv === null) return; // if piece eat another piece, this listener dont need to work.
     const cell: Cell = this.cellHook[this.getCellFromPiece(pieceDiv)!.id];
-    this.availableCells = piece.getAvailableCellToMove(this.board);
+    this.availableCells = this.gameManagerTest.getValidMoves(piece);
     this.availableCells.forEach(cell => {
       const cellDiv = this.cellDivHook[cell.getId()];
       cellDiv.classList.add('canmove');

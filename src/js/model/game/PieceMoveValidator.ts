@@ -11,12 +11,13 @@ export class PieceMoveValidator {
   
   private board: Board;
   private pieceSet: PieceSet;
-  private lastSimulatedMove: Move | null;
+  private lastSimulatedMove: Move | null = null;
   private moveBuilder: MoveBuilder;
 
   public constructor(board: Board, pieceSet: PieceSet) {
     this.board = board;
     this.pieceSet = pieceSet;
+    this.moveBuilder = new MoveBuilder();
   }
   
   private getAttackedCells(pieces: Piece[]): Set<Cell> {
@@ -38,11 +39,15 @@ export class PieceMoveValidator {
       const eatenPiece: Piece | null = move.getEatenPiece();
       if(eatenPiece != null) {
         const index: number  = enemyPieces.indexOf(eatenPiece);
-        enemyPieces.splice(index);
+        enemyPieces.splice(index, 1);
       }
 
-      if(!this.isInCheck(piece, enemyPieces)) {
+      if(!this.isInCheck(pieceKing, enemyPieces)) {
         validatedCell.push(cell);
+      }
+
+      if(eatenPiece != null) {
+        enemyPieces.push(eatenPiece);
       }
 
       this.undoSimulateMove();
@@ -75,8 +80,9 @@ export class PieceMoveValidator {
     if(this.lastSimulatedMove == null) return;
     const move = this.lastSimulatedMove!;
     move.getMovedPiece().move(move.getStartCell());
-    if(move.getEatenPiece != null) {
+    if(move.getEatenPiece() != null) {
       move.getEatenPiece()!.move(move.getTargetCell());
     }
+    this.lastSimulatedMove = null;
   }
 } 

@@ -9,8 +9,6 @@ import { DivBoardView } from "./model/view/DivBoardView.js";
 const board: Board = new BoardCellArray(8,8);
 const boardViewController: DivBoardView = 
   new DivBoardView(document.querySelector('.board')!, board);
-const startPiecePlacer: PiecePlacer = new DefaultPiecePlacer();
 
-startPiecePlacer.placePieces(startPiecePlacer.generatePieces(), board);
 boardViewController.initBoardDiv();
 
