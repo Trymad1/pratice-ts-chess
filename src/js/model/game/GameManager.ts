@@ -1,5 +1,4 @@
 import { Color } from "../Color.js";
-import { Point } from "../Point.js";
 import { Board } from "../board/Board.js";
 import { BoardCellArray } from "../board/BoardCellArray.js";
 import { Cell } from "../board/Cell.js";
@@ -13,8 +12,7 @@ export class GameManager {
 
   private board: Board;
   private piecePlacer: PiecePlacer;
-  private blackKing: King;
-  private whiteKing: King;
+  private pieceSet: PieceSet;
 
   // depending on the game mode create board and piece placer, 
   // impl in future, now always default chess
@@ -24,18 +22,14 @@ export class GameManager {
 
     const pieceSet: PieceSet = this.piecePlacer.generatePieces();
     this.piecePlacer.placePieces(pieceSet, this.board);
-    this.blackKing = this.board.getCell(new Point(4, 0)).getPiece()!;
-    this.whiteKing = this.board.getCell(new Point(7, 4)).getPiece()!;
   };
 
   public getBoard(): Board {
     return this.board;
   }
 
-  // Crappy code, change the logic of getting a king in the future
-  public getKing(color: Color): King {
-    if(color == Color.BLACK) return  this.blackKing;
-    else return this.whiteKing;
+  private getKing(color: Color): King {
+    return this.pieceSet.getKing(color);
   }
 
   public getValidMoves(piece: Piece): Cell[] {

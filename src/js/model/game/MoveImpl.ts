@@ -61,7 +61,7 @@ export class MoveBuilder {
     return this;
   }
 
-  public eatenPiece(piece: Piece): MoveBuilder {
+  public eatenPiece(piece: Piece | null): MoveBuilder {
     this.eatenPieceField = piece;
     return this;
   }
