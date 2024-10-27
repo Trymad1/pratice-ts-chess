@@ -7,6 +7,7 @@ import { King } from "../piece/King.js";
 import { Piece } from "../piece/Piece.js";
 import { DefaultPiecePlacer } from "./DefaultPiecePlacer.js";
 import { PiecePlacer } from "./PiecePlacer.js";
+import { PieceSet } from "./PieceSet.js";
 
 export class GameManager {
 
@@ -21,8 +22,8 @@ export class GameManager {
     this.board = new BoardCellArray(8,8);
     this.piecePlacer = new DefaultPiecePlacer();
 
-    const pieceMap: Map<Point, Piece> = this.piecePlacer.generatePieces();
-    this.piecePlacer.placePieces(pieceMap, this.board);
+    const pieceSet: PieceSet = this.piecePlacer.generatePieces();
+    this.piecePlacer.placePieces(pieceSet, this.board);
     this.blackKing = this.board.getCell(new Point(4, 0)).getPiece()!;
     this.whiteKing = this.board.getCell(new Point(7, 4)).getPiece()!;
   };

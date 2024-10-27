@@ -1,11 +1,12 @@
 import { Point } from "../Point.js";
 import { Board } from "../board/Board.js";
 import { Piece } from "../piece/Piece.js";
+import { PieceSet } from "./PieceSet.js";
 
 export interface PiecePlacer {
 
-  generatePieces(): Map<Point, Piece>;
+  generatePieces(): PieceSet;
 
-  placePieces(pieceMap: Map<Point, Piece>, board: Board): void;
+  placePieces(pieceSet: PieceSet, board: Board): void;
 
 }
