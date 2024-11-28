@@ -1,13 +1,13 @@
 import { Board } from "../board/Board.js";
 import { Cell } from "../board/Cell.js";
 import { Piece, PieceType } from "../piece/Piece.js";
-import { DefaultSvgPieceViewFactory } from "./DefaultSvgPieceViewFactory.js";
 import { PieceViewFactory } from "./PieceViewFactory.js";
 import { Point } from "../Point.js";
 import { Color } from "../Color.js";
-import { CatPngPieceViewFactory } from "./CatPngPieceViewFactory.js";
+import { DefaultSvgPieceViewFactory } from "./DefaultSvgPieceViewFactory.js";
+import { GameManager } from "../game/GameManager.js";
 
-export class BoardViewController {
+export class DivBoardView {
 
   private pieceViewFactory: PieceViewFactory;
   private board: Board;
@@ -16,11 +16,15 @@ export class BoardViewController {
   private pieceHook: {[key: string] : Piece} = { } 
   private cellDivHook: { [key: string] : HTMLDivElement } = { };
   private pieceDivHook: {[key: string] : HTMLDivElement } = { };
+  
+  private gameManagerTest: GameManager;
 
   public constructor(boardDiv: HTMLDivElement, board: Board) {
-    this.pieceViewFactory = new CatPngPieceViewFactory();
+    this.pieceViewFactory = new DefaultSvgPieceViewFactory();
     this.board = board;
     this.boardDiv = boardDiv;
+    
+    this.gameManagerTest = new GameManager(board);
   }
 
   setPieceViewFactory(factory: PieceViewFactory): void {
@@ -39,22 +43,19 @@ export class BoardViewController {
     
     const pieceColorOnBoard: Color[] = [];
 
-    for(let i = 0; i < 8; i++) {
-      for(let j = 0; j < 8; j++) {
-        const cell: Cell = this.board.getCell(new Point(j,i));
-        const piece: Piece | null = cell.getPiece();
+    this.board.getAllCells().forEach(cell => {
+      const piece: Piece | null = cell.getPiece();
 
-        const cellDiv: HTMLDivElement = this.createCellDiv(cell);
-        this.boardDiv.appendChild(cellDiv);
-  
-        if(piece != null) {
-          const pieceColor = piece.getColor();
-          if(!pieceColorOnBoard.includes(pieceColor)) pieceColorOnBoard.push(pieceColor);
-          const pieceDiv: HTMLDivElement = this.createPieceDiv(piece);
-          cellDiv.appendChild(pieceDiv);
-        }
+      const cellDiv: HTMLDivElement = this.createCellDiv(cell);
+      this.boardDiv.appendChild(cellDiv);
+
+      if(piece != null) {
+        const pieceColor = piece.getColor();
+        if(!pieceColorOnBoard.includes(pieceColor)) pieceColorOnBoard.push(pieceColor);
+        const pieceDiv: HTMLDivElement = this.createPieceDiv(piece);
+        cellDiv.appendChild(pieceDiv);
       }
-    }
+    });
 
     let styleSheet: HTMLStyleElement | null = document.getElementById('dynamicPieceStyle') as HTMLStyleElement;
 
@@ -88,6 +89,7 @@ export class BoardViewController {
   private isCellEmpty(cellDiv: HTMLDivElement): boolean{
     return !cellDiv.hasChildNodes();
   }
+
   private takedPiece: HTMLDivElement | null = null;
   private availableCells: Cell[] = [];
 
@@ -98,7 +100,8 @@ export class BoardViewController {
         this.movePieceToCell(this.takedPiece, cellDiv);
 
         //maybe need refactor in future, board manipulates on separate class
-        this.pieceHook[this.takedPiece.id].move(this.cellHook[cellDiv.id]) 
+        let eaten: Piece | null = this.pieceHook[this.takedPiece.id].move(this.cellHook[cellDiv.id]) 
+        this.gameManagerTest.eatenPiece(eaten);
 
       } 
       this.takedPiece = null;
@@ -114,7 +117,7 @@ export class BoardViewController {
     })
   }
 
-  private movePieceToCell(pieceDiv: HTMLDivElement, cellDiv: HTMLDivElement): HTMLDivElement | null {
+  public movePieceToCell(pieceDiv: HTMLDivElement, cellDiv: HTMLDivElement): HTMLDivElement | null {
     this.getCellFromPiece(pieceDiv)?.removeChild(pieceDiv);
     const pieceFromTargetDiv: HTMLDivElement | null = this.getPieceFromCell(cellDiv)
     if(pieceFromTargetDiv != null) {
@@ -133,7 +136,7 @@ export class BoardViewController {
     const cellDiv: HTMLDivElement | null = this.getCellFromPiece(pieceDiv);
     if(cellDiv === null) return; // if piece eat another piece, this listener dont need to work.
     const cell: Cell = this.cellHook[this.getCellFromPiece(pieceDiv)!.id];
-    this.availableCells = piece.getAvailableCellToMove(this.board, cell);
+    this.availableCells = this.gameManagerTest.getValidMoves(piece);
     this.availableCells.forEach(cell => {
       const cellDiv = this.cellDivHook[cell.getId()];
       cellDiv.classList.add('canmove');

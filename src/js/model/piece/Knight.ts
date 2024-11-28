@@ -11,7 +11,7 @@ export class Knight extends Piece {
   }
 
   //fix cringe hardcode
-  public getAvailableCellToMove(board: Board, pieceCell: Cell): Cell[] {
+  public getAvailableCellToMove(board: Board): Cell[] {
     const currentPoint: Point = this.getCell()!.getPoint();
     const pointArr: Point[] = []
     pointArr.push(new Point(currentPoint.getX() - 2, currentPoint.getY() - 1));

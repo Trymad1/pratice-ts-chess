@@ -9,13 +9,23 @@ export class BoardCellArray implements Board {
   private readonly width: number;
   private readonly height: number;  
   private readonly cellArr: readonly Cell[][];
-  private readonly pieceIdDictionary: {[key: number]: Piece} 
 
   public constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
     this.cellArr = this.initCellArray();
-    this.pieceIdDictionary = {};
+  }
+
+  getAllCells(): Cell[] {
+    const cellArr: Cell[] = [];
+    
+    for(let i = 0; i < 8; i++) {
+      for(let j = 0; j < 8; j++) {
+        cellArr.push(this.getCell(new Point(j,i)));
+      }
+    }
+
+    return cellArr;
   }
 
   private initCellArray(): Cell[][] {
@@ -62,23 +72,5 @@ export class BoardCellArray implements Board {
 
     return true;
   }
-
-  // pieces not copy, maybe change it later if necessary
-  copy(): Board {
-    const copyBoard: Board = new BoardCellArray(this.width, this.height);
-
-    for (let i = 0; i < this.height; i++) {
-      const row = this.cellArr[i];
-      
-      for(let j = 0; j < this.width; j++) {
-        const point: Point = new Point(j, i);
-        const currCell: Cell = this.getCell(point);
-        if(!currCell.isEmpty()) {
-          copyBoard.getCell(point).setPiece(currCell.getPiece()!)
-        }
-      }
-    }
-
-    return copyBoard;
-  }
+  
 }

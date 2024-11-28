@@ -31,7 +31,7 @@ export abstract class Piece {
     return `${timestamp}-${randomString}`;
   }
 
-  public abstract getAvailableCellToMove(board: Board, pieceCell: Cell): Cell[];
+  public abstract getAvailableCellToMove(board: Board): Cell[];
 
   public getColor(): Color {
     return this.color;
@@ -57,4 +57,5 @@ export abstract class Piece {
     const anotherPiece: Piece | null = targetCell.setPiece(this);
     return anotherPiece;
   }
+ 
 }

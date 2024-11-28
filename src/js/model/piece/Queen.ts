@@ -10,7 +10,7 @@ export class Queen extends Piece {
     super(color, PieceType.QUEEN);
   }
 
-  public getAvailableCellToMove(board: Board, pieceCell: Cell): Cell[] {
+  public getAvailableCellToMove(board: Board): Cell[] {
     return [...this.getAvailablePointInDirection(0, 1, board),
       ...this.getAvailablePointInDirection(0, -1, board),
       ...this.getAvailablePointInDirection(1, 0, board),
